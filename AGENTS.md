@@ -1,5 +1,7 @@
 # yaml
 
+`decisions-taken.md` is generated — from the meta repository's `specs/<milestone>/decisions-taken.md` by `scripts/decisions-split.py`; edit it there, never here.
+
 > Repository: `botopink/yaml` (`git@github.com:botopink/yaml.git`) · in the meta checkout: `repository/yaml/`
 
 One YAML subset read into `json`'s `Json` (decision 396): mappings, sequences, scalars; an anchor, an alias, a tag and a second document each refused with the line (decision 67). Seeded from rakun's `config.bp` reader by 142 step 2; depends on `json`.
