@@ -1,0 +1,3 @@
+pub fn frontMatter(page: string) -> string {
+    return page.split("---\n").at(1) ?? "";
+}

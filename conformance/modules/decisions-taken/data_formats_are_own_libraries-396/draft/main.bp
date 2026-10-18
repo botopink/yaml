@@ -1,3 +1,32 @@
 //// Decision 396 — Markdown, YAML and JSON are three libraries of their own — `markdown`, `yaml`, `json` (`botopink/{markdown,yaml,json}` at `repository/{markdown,yaml,json}`, 326's rule) — and std knows nothing of JSON.
 
-pub fn main() -> void {}
+import {io.terminal} from "std";
+import {Json, encode} from "json";
+import {decode} from "yaml";
+
+fn show(text: string) -> void {
+    case decode(text) {
+        Ok(doc) -> terminal.print(encode(doc));
+        Error(e) -> terminal.print("refused: " + e);
+    }
+}
+
+fn kinds(doc: Json) -> void {
+    doc
+        .members()
+        .forEach({ m -> terminal.print(m._0 + " is " + m._1.kindName()) });
+}
+
+pub fn main() -> void {
+    // A block mapping, a block sequence, a flow sequence, scalars and a comment.
+    val config = "name: site\nport: 8080\ndebug: false\n# the pages\npages:\n  - home\n  - about\nlocales: [en, pt]\n";
+    show(config);
+    case decode(config) {
+        Ok(doc) -> kinds(doc);
+        Error(e) -> terminal.print("refused: " + e);
+    }
+    // An anchor and its alias, a tag, a second document: each refused with its line.
+    show("base: &b\n  port: 1\nsite: *b\n");
+    show("port: !!str 8080\n");
+    show("a: 1\n---\nb: 2\n");
+}

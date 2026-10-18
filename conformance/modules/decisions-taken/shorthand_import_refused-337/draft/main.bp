@@ -1,3 +1,12 @@
 //// Decision 337 — The shorthand import goes; `mod m;` binds the namespace `m` in the module that declares it.
 
-pub fn main() -> void {}
+import {io.terminal} from "std";
+import {decode} from "yaml";
+import {frontMatter};
+
+pub fn main() -> void {
+    case decode(frontMatter("---\ntitle: Notes\n---\nbody\n")) {
+        Ok(doc) -> terminal.print(doc.field("title")?.str() ?? "untitled");
+        Error(e) -> terminal.print("refused: " + e);
+    }
+}

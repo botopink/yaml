@@ -1,3 +1,18 @@
 //// Decision 206 — `import {…} from "<name>"` resolves only to a package — std, a bundled package or a declared dependency.
 
-pub fn main() -> void {}
+import {io.terminal} from "std";
+import {Json} from "json";
+import {decode} from "yaml";
+import {yaml.frontMatter};
+
+fn title(doc: Json) -> string {
+    return doc.field("title")?.str() ?? "untitled";
+}
+
+pub fn main() -> void {
+    val page = "---\ntitle: Notes\ntags: [yaml, json]\n---\n# Notes\n";
+    case decode(frontMatter(page)) {
+        Ok(doc) -> terminal.print(title(doc));
+        Error(e) -> terminal.print("refused: " + e);
+    }
+}

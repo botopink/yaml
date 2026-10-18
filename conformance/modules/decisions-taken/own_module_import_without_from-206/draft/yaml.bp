@@ -1,0 +1,5 @@
+// This package's own module `yaml`, named like the `yaml` dependency on purpose:
+// `import {yaml.frontMatter};` reaches it, `from "yaml"` never does.
+pub fn frontMatter(page: string) -> string {
+    return page.split("---\n").at(1) ?? "";
+}

@@ -1,3 +1,22 @@
 //// Decision 594 — Every library runs at build on the wasm comptime runtime (434), jhonstart first; a function only Erlang or Node can run is a located error there.
 
-pub fn main() -> void {}
+import {io.terminal} from "std";
+import {encode} from "json";
+import {decode} from "yaml";
+
+fn toJson(text: string) -> string {
+    return case decode(text) {
+        Ok(doc) -> encode(doc);
+        Error(e) -> "refused: " + e;
+    };
+}
+
+pub fn main() -> void {
+    // `yaml` and `json` run at build on the wasm comptime runtime, whatever the target.
+    val atBuild = comptime toJson("name: site\nlocales: [en, pt]\n");
+    val atRun = toJson("name: site\nlocales: [en, pt]\n");
+    terminal.print(atBuild);
+    terminal.print(atBuild == atRun);
+    // A refusal is an answer like any other, computed at build the same way.
+    terminal.print(comptime toJson("a: &x 1\n"));
+}
