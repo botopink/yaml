@@ -8,7 +8,9 @@ One YAML subset read into `json`'s `Json` (decision 396): mappings, sequences, s
 
 A library of its own (decision 396, decision 326's rule). It is filled by
 `specs/1.0.12-beta/03-bundled-libs/142-data-formats`; until its step lands this repository holds
-only its scaffold.
+only its scaffold: `botopink.json` names the entry `src/root.bp`, a module of doc comments alone, so
+the library check (`botopink packages --list`, decision 1004) loads the package and finds no test
+instead of refusing it `load-not-a-package` (1004 P3).
 
 ## Hooks
 

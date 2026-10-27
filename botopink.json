@@ -4,5 +4,6 @@
   "otp": "28",
   "description": "One YAML subset read into json's Json: mappings, sequences, scalars; an anchor, an alias, a tag and a second document each refused with the line",
   "src": "src/",
-  "target": "erlang"
+  "target": "erlang",
+  "entry": "root.bp"
 }

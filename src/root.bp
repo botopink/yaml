@@ -1,0 +1,6 @@
+//// yaml — one YAML subset read into json's `Json` (decision 396, `03-bundled-libs/142`):
+//// mappings, sequences, scalars; an anchor, an alias, a tag and a second document each refused
+//// with the line.
+////
+//// The package's entry (decision 1004 P3): the scaffold declares no module yet, so a program that
+//// loads `yaml` by name compiles it and finds no test; the modules land with 142's steps.
